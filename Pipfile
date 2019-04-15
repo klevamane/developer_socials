@@ -12,6 +12,7 @@ pytest-django = "*"
 pytest-cov = "*"
 mixer = "*"
 "psycopg2-binary" = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 
