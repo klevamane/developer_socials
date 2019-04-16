@@ -10,13 +10,19 @@ class ListCreateEducation(ListCreateAPIView):
     """Implements creating and listing objects for Education"""
     queryset = Education.objects.all()
     serializer_class = EducationSerializer
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         return self.request.user.education.all()
+
+    def perform_create(self, serializer):
+        serializer.save(developer=self.request.user)
 
 
 class RetrieveUpdateDestroyEducation(RetrieveUpdateDestroyAPIView):
     queryset = Education.objects.all()
     serializer_class = EducationSerializer
     permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return self.request.user.education.all()
