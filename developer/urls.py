@@ -4,6 +4,6 @@ from .views import ListCreateDeveloper, ListDeveloperProfiles, RetrieveDeveloper
 
 urlpatterns = [
     path('', ListCreateDeveloper.as_view(), name='list_create_dev'),
-    path('profiles/', ListDeveloperProfiles.as_view(), name='list_create_dev'),
+    path('profiles/', ListDeveloperProfiles.as_view(), name='list_devs'),
     path('profiles/<int:pk>/', RetrieveDeveloperProfile.as_view(), name='retrieve_delete_update_dev')
 ]

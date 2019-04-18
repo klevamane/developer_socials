@@ -26,7 +26,28 @@ class DestroyDeveloper(DestroyAPIView):
 # PROFILE SECTION
 class ListDeveloperProfiles(ListAPIView):
     queryset = Developer.objects.all()
+    # params = {
+    #     'firstname': 'test_dev1',
+    #     'lastname': 'test_dev1',
+    #     'email': 'test_dev1@test.com',
+    #     'date_of_birth': '1992-01-01',
+    #     'mobile': '08027538232',
+    #     'password': 'password123'
+    # }
+    # print('got herererer')
+    # # developer = Developer.create(**params)
+    # developer = Developer(**params)
+    # developer.save()
     serializer_class = DeveloperProfilesSerializer
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = DeveloperProfilesSerializer(queryset, many=True)
+        context = {
+            'data': serializer.data,
+            'message': 'successfully retrieved'
+        }
+        return Response(context, status=status.HTTP_200_OK)
 
 
 class RetrieveDeveloperProfile(RetrieveAPIView):
