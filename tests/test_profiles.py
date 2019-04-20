@@ -10,7 +10,7 @@ CHARSET = 'utf-8'
 
 
 @pytest.mark.django_db
-class TestUrls:
+class TestProfiles:
     """Test the Developer URL"""
 
     # This tells django that your test needs database access
@@ -42,16 +42,29 @@ class TestUrls:
         message = response.data['message']
 
         assert response.status_code == 200
-        assert response_json[0]['id'] == 1
+        assert response_json[0]['id'] == new_developer.id
         assert response_json[0]['firstname'] == 'test_dev1'
         assert len(response_json) >= 1
         assert message == 'successfully retrieved'
 
-    def test_details_of_a_single_developer(self, new_developer):
+    def test_get_details_of_a_single_developer(self, new_developer):
         new_developer.save()
         client = APIClient()
-        path = reverse('retrieve_delete_update_dev', kwargs={'pk': 1})
+        path = reverse('retrieve_dev', kwargs={'pk': new_developer.id})
         response = client.get(path)
         response_json = response.data['data']
         assert response.status_code == 200
 
+    def test_edit_details_of_a_developer(self, new_developer):
+        new_developer.save()
+        developer_id = new_developer.id
+
+        client = APIClient()
+        path = reverse('retrieve_dev', kwargs={'pk': developer_id})
+        update_data = {
+            'twitter': 'http://twitter.com/test_user'
+        }
+        response = client.put(path, update_data)
+        print('**** - - - ', response)
+        print('**** - - - ', response)
+        assert response.status_code == 200

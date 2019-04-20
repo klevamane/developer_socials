@@ -1,5 +1,6 @@
 [run]
 omit = */tests/*
        */migrations/*
+       */apps/*
 
 source=developer,education,experience
