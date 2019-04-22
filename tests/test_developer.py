@@ -20,3 +20,9 @@ class TestDeveloperOperations:
         client = APIClient()
         response = client.post(path, signup_data)
         assert response.status_code == 201
+
+    def test_list_all_developers(self, new_developer):
+        path = reverse('list_create_dev')
+        client = APIClient()
+        response = client.get(path)
+        assert response.status_code == 200

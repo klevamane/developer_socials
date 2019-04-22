@@ -18,9 +18,9 @@ class TestProfiles:
     def test_detail_url_path(self):
         # The reverse method gets the path by accepting the path name('retrieve_delete_update_dev')
         # and since the path expects an integer, we make use of the kwargs here
-        path = reverse('retrieve_delete_update_dev', kwargs={'pk': 1})
+        path = reverse('retrieve_dev', kwargs={'pk': 1})
         # the resolve method is kind of the opposite of the reverse method
-        assert resolve(path).view_name == 'retrieve_delete_update_dev'
+        assert resolve(path).view_name == 'retrieve_dev'
 
     # Sample:
     # def test_product_is_in_stock(self):
@@ -55,16 +55,15 @@ class TestProfiles:
         response_json = response.data['data']
         assert response.status_code == 200
 
-    def test_edit_details_of_a_developer(self, new_developer):
-        new_developer.save()
-        developer_id = new_developer.id
-
-        client = APIClient()
-        path = reverse('retrieve_dev', kwargs={'pk': developer_id})
-        update_data = {
-            'twitter': 'http://twitter.com/test_user'
-        }
-        response = client.put(path, update_data)
-        print('**** - - - ', response)
-        print('**** - - - ', response)
-        assert response.status_code == 200
+    # TODO: feature not yet implemented
+    # def test_edit_details_of_a_developer(self, new_developer):
+    #     new_developer.save()
+    #     developer_id = new_developer.id
+    #
+    #     client = APIClient()
+    #     path = reverse('retrieve_dev', kwargs={'pk': developer_id})
+    #     update_data = {
+    #         'twitter': 'http://twitter.com/test_user'
+    #     }
+    #     response = client.put(path, update_data)
+    #     assert response.status_code == 200
