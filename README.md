@@ -40,7 +40,7 @@ Please read CONTRIBUTING.md for details on our code of conduct, and the process 
 We use SemVer for versioning. For the versions available, see the tags on this repository.
 
 ## Authors
-Onengiye Richard - Initial work - PurpleBooth
+Onengiye Richard
 
 
 ## License
